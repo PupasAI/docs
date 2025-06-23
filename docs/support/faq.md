@@ -55,16 +55,16 @@ Price updates are recorded on-chain and visible through the platform dashboard.
 
 Your yield comes from LP token price appreciation:
 
-```javascript
-// Example calculation
-const initialLpPrice = 1.00;  // Price when you staked
-const currentLpPrice = 1.15;  // Current price
-const yield = (currentLpPrice / initialLpPrice - 1) * 100;
-// Result: 15% gain
+```ride
+# Example calculation (pseudocode for demonstration)
+let initialLpPrice = 1000000  # 1.00 with 6 decimals
+let currentLpPrice = 1150000  # 1.15 with 6 decimals
+let yieldPercent = fraction((currentLpPrice - initialLpPrice), 100, initialLpPrice)
+# Result: 15% gain
 
-// Your portfolio value
-const yourLpTokens = 1000;
-const portfolioValue = yourLpTokens * currentLpPrice;
+# Your portfolio value
+let yourLpTokens = 1000000000  # 1000 LP tokens (6 decimals)
+let portfolioValue = fraction(yourLpTokens, currentLpPrice, Scale6)
 ```
 </details>
 

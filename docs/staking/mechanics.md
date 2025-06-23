@@ -8,55 +8,86 @@ Understanding the technical mechanics behind Pupas Protocol helps you maximize r
 
 ### Smart Contract Functions
 
-#### Stake Function
-
-```solidity
-function stake(uint256 amount, uint8 tokenType) external returns (uint256 lpTokens) {
-    // Validate token type
-    require(amount > 0, "Amount must be positive");
+#### Provide Function (Staking)
+```ride
+@Callable(i)
+func provide() = {
+  let pmt = i.payments[0]
+  
+  # Validate supported tokens (USDTu or USDT-ERC20)
+  if (pmt.assetId != usdtId && pmt.assetId != usdtuId) then
+    throw("please attach USDT: " + usdtIdStr + ", " + usdtuIdStr)
+  else
+    # Calculate protocol fee (0.3% of stake)
+    let feeAmount = fraction(pmt.amount, MintFee, Scale6)
+    let cleanAmount = pmt.amount - feeAmount
     
-    // Calculate LP tokens to mint
-    uint256 lpTokens = amount.mul(PRECISION).div(getCurrentLpPrice());
+    # Calculate LP tokens to mint based on current price
+    let lpAmount = fraction(cleanAmount, Scale6, tryGetInteger("global_lpPrice"))
     
-    // Transfer tokens and mint LP tokens
-    transferFrom(msg.sender, address(this), amount);
-    _mint(msg.sender, lpTokens);
-    
-    // Update pool state
-    totalStaked = totalStaked.add(amount);
-    emit Staked(msg.sender, amount, lpTokens);
-    
-    return lpTokens;
+    [
+      Reissue(lpId, lpAmount, true),
+      ScriptTransfer(i.caller, lpAmount, lpId),
+      ScriptTransfer(FeeAddress, feeAmount, pmt.assetId)
+    ]
 }
 ```
 
 #### Withdraw Function
-
-```solidity
-function withdraw(uint256 lpTokens) external returns (uint256 usdtAmount) {
-    // Calculate USDT amount to return
-    uint256 usdtAmount = lpTokens.mul(getCurrentLpPrice()).div(PRECISION);
-    
-    // Burn LP tokens and transfer USDT
-    _burn(msg.sender, lpTokens);
-    transfer(msg.sender, usdtAmount);
-    
-    // Update pool state
-    totalStaked = totalStaked.sub(usdtAmount);
-    emit Withdrawn(msg.sender, lpTokens, usdtAmount);
-    
-    return usdtAmount;
+```ride
+@Callable(i)
+func withdraw(assetIdStr: String, lendMarketStr: String) = {
+  let pmt = i.payments[0]
+  
+  # Validate LP token attachment
+  if (pmt.assetId != lpId) then
+    throw("please attach LP: " + lpIdStr)
+  else
+    # Validate withdrawal asset (USDTu or USDT-ERC20 only)
+    if (assetIdStr != usdtIdStr && assetIdStr != usdtuIdStr) then
+      throw("you can only withdraw USDT: " + usdtIdStr + ", " + usdtuIdStr)
+    else
+      let lpAmount = pmt.amount
+      
+      # Calculate USDT amount based on current LP price
+      let amountToWithdraw = fraction(lpAmount, tryGetInteger("global_lpPrice"), Scale6)
+      
+      [
+        Burn(lpId, lpAmount),
+        ScriptTransfer(i.caller, amountToWithdraw, fromBase58String(assetIdStr))
+      ]
 }
 ```
 
 ## LP Token Price Mechanism
 
 ### Price Update Frequency
+- **Interval**: Every 60 minutes (3,600 seconds)
+- **Oracle Function**: `updateLpPrice()` called by authorized address
+- **Validation**: Price change limits prevent manipulation
+- **Transparency**: All updates recorded on-chain
 
-* **Interval**: Every 60 minutes (3,600 seconds)
-* **Data Sources**: Multiple exchange APIs aggregated
-* **Validation**: Price change limits prevent manipulation
-* **Transparency**: All updates recorded on-chain
+#### Oracle Price Update
+```ride
+@Callable(i)
+func updateLpPrice(lpPrice: Int) = {
+  let currentOraclePrice = valueOrElse(getInteger("global_lpPrice"), Scale6)
+  let oracleChangeDelta = abs(max(
+    fraction(currentOraclePrice, Scale6, lpPrice),
+    fraction(lpPrice, Scale6, currentOraclePrice)
+  ) - Scale6)
+  
+  # Validate caller authorization
+  if (i.caller != this) then
+    throw("available for self invoke only")
+  else
+    # Check volatility tolerance
+    if (oracleChangeDelta > OracleVolatilityTolerance) then
+      throw("max change for oracle is " + toString(fraction(OracleVolatilityTolerance / 100, Scale6)) + "%")
+    else
+      [IntegerEntry("global_lpPrice", lpPrice)]
+}
+```
 
 ## Investment Flow
 
@@ -71,153 +102,176 @@ function withdraw(uint256 lpTokens) external returns (uint256 usdtAmount) {
 
 ### Investment Strategies
 
-#### Lending Protocol Selection
-
-* **Protocol Analysis**: AI evaluates available lending platforms on Waves
-* **Risk Assessment**: Evaluate smart contract security and yields
-* **Optimal Allocation**: Distribute funds across best protocols
-
-#### Staking Opportunities
-
-* **Validator Selection**: Choose best performing validators
-* **Delegation Strategies**: Optimize staking rewards
-* **Auto-Compounding**: Reinvest staking rewards automatically
+#### Lending Protocol Integration
+```ride
+func withdrawFromLend(amount: Int, assetIdStr: String, market: Address) = {
+  let inv = invoke(market, "withdraw", [assetIdStr, [amount]], [])
+  
+  if (inv == inv) then [] 
+  else throw("Strict value is not equal to itself.")
+}
+```
 
 ## Risk Management System
 
 ### Position Limits
-
-```javascript
-const RISK_LIMITS = {
-    maxPositionSize: 0.25,      // 25% of pool per strategy
-    maxDrawdown: 0.10,          // 10% maximum loss per strategy
-    correlationLimit: 0.70,     // Maximum correlation between strategies
-    liquidityReserve: 0.15      // 15% kept for withdrawals
-};
+```ride
+# Risk management constants
+let OracleVolatilityTolerance = 100000  # 10% max price change per update
+let MintFee = 3000                      # 0.3% protocol fee
+let Scale6 = 1000000                    # 6 decimal precision
 ```
 
-### Stop-Loss Mechanisms
-
-* **Individual Positions**: 5% stop-loss per trade
-* **Strategy Level**: 10% drawdown triggers strategy pause
-* **Pool Level**: 15% total loss triggers emergency mode
-
 ### Diversification Rules
-
-* **Maximum 4 active strategies** at any time
-* **No more than 40% in single asset class**
-* **Geographic diversification** across exchanges
+- **Maximum volatility tolerance**: 10% per price update
+- **Protocol fee**: 0.3% of stake amount
+- **Automated position management** via AI agents
 
 ## Token Economics
 
 ### LP Token Supply Management
 
 #### Minting Process
-
-```
-Protocol Fee = Stake Amount * 0.003
-Net Stake = Stake Amount - protocolFee
-New LP Tokens = Net Stake ÷ Current LP Price
-Total LP Supply += New LP Tokens
+```ride
+# LP tokens minted = (stake amount - fee) / current LP price
+let lpAmount = fraction(cleanAmount, Scale6, tryGetInteger("global_lpPrice"))
 ```
 
 #### Burning Process
-
-```
-USDT Return = LP Tokens × Current LP Price
-Total LP Supply -= Burned LP Tokens
+```ride
+# USDT returned = LP tokens × current LP price
+let amountToWithdraw = fraction(lpAmount, tryGetInteger("global_lpPrice"), Scale6)
 ```
 
 ### Fee Structure
 
 #### Protocol Fee (0.3% of stake)
+```ride
+# Applied at staking time, sent to treasury
+let feeAmount = fraction(pmt.amount, MintFee, Scale6)  # 0.3% of initial stake
+let cleanAmount = pmt.amount - feeAmount
 
-```javascript
-// Applied at staking time, sent to treasury
-function stake(uint256 amount) external {
-    const protocolFee = amount * 0.003;  // 0.3% of initial stake
-    const netStake = amount - protocolFee;
-    
-    // Send fee to treasury
-    transfer(treasuryAddress, protocolFee);
-    
-    // Mint LP tokens based on net stake amount
-    const lpTokensToMint = netStake / getCurrentLpPrice();
-    _mint(msg.sender, lpTokensToMint);
-}
+# Send fee to treasury and mint LP tokens based on net stake
+[
+  ScriptTransfer(FeeAddress, feeAmount, pmt.assetId),
+  Reissue(lpId, lpAmount, true),
+  ScriptTransfer(i.caller, lpAmount, lpId)
+]
+```
+
+## Withdrawal Mechanics
+
+### Instant Withdrawal
+- **No Lock Period**: Withdraw anytime without penalties
+- **Current Price**: Always withdraw at latest LP price
+- **Automated Processing**: Smart contract handles transfers
+
+### LP Token Burning
+```ride
+# Burn LP tokens and transfer corresponding USDT amount
+[
+  Burn(lpId, lpAmount),
+  ScriptTransfer(i.caller, amountToWithdraw, fromBase58String(assetIdStr))
+]
 ```
 
 ## Performance Tracking
 
-### APY Calculation
+### Price Calculation
+```ride
+# Current LP price stored as integer with 6 decimal precision
+let currentPrice = tryGetInteger("global_lpPrice")
 
-```javascript
-// Rolling 30-day APY calculation
-const periodReturns = [];
-for (let i = 0; i < 30; i++) {
-    const dailyReturn = (priceToday / priceYesterday) - 1;
-    periodReturns.push(dailyReturn);
+# Helper function to safely get integer values
+func tryGetInteger(key: String) = {
+  match getInteger(this, key) {
+    case a: Int => a
+    case _ => 0
+  }
 }
-
-const avgDailyReturn = periodReturns.reduce((a, b) => a + b) / 30;
-const annualizedAPY = Math.pow(1 + avgDailyReturn, 365) - 1;
 ```
 
 ### Performance Metrics
-
-* **Sharpe Ratio**: Risk-adjusted returns
-* **Maximum Drawdown**: Largest peak-to-trough decline
-* **Win Rate**: Percentage of profitable strategies
-* **Volatility**: Standard deviation of returns
+- **LP Price History**: Tracked via oracle updates
+- **Total Value Locked**: Sum of all staked assets
+- **Active Strategies**: Monitored by AI agents
+- **Fee Collection**: Protocol revenue tracking
 
 ## Emergency Procedures
 
-### Circuit Breakers
-
-```solidity
-modifier emergencyStop() {
-    require(!paused, "Contract is paused");
-    if (totalLoss > MAX_ACCEPTABLE_LOSS) {
-        paused = true;
-        emit EmergencyStop(block.timestamp);
-    }
-    _;
-}
+### Access Control
+```ride
+# Only contract itself can update LP prices
+if (i.caller != this) then
+  throw("available for self invoke only")
 ```
 
-### Recovery Mechanisms
-
-* **Pause Trading**: Stop new investments during market stress
-* **Liquidate Positions**: Convert investments back to USDT
-* **Proportional Distribution**: Share remaining funds among LP holders
+### Initialization Security
+```ride
+@Callable(i)
+func init(usdtIdStr: String, usdtuIdStr: String) = {
+  if (i.caller != this) then
+    throw("available for self invoke only")
+  else
+    # Initialize protocol with supported tokens
+    let newLp = Issue("PUPAS LP", "PUPAS AI TREASURY LP", 0, 6, true)
+    let newLpId = toBase58String(calculateAssetId(newLp))
+    
+    [
+      newLp,
+      StringEntry("setup_lpId", newLpId),
+      StringEntry("setup_usdtId", usdtIdStr),
+      StringEntry("setup_usdtuId", usdtuIdStr)
+    ]
+}
+```
 
 {% hint style="info" %}
 **Technical Deep Dive**: For additional technical details, see our [Protocol Features](../protocol/features.md) and [LP Tokens](lp-tokens.md) guides.
 {% endhint %}
 
-## Gas Optimization
+## Waves Blockchain Benefits
 
-### Waves Blockchain Benefits
+### Transaction Efficiency
+- **Low Fees**: ~0.005 WAVES per transaction
+- **Fast Finality**: ~1 minute confirmation
+- **Predictable Costs**: No gas price volatility
+- **RIDE Language**: Secure, predictable smart contracts
 
-* **Low Fees**: \~0.005 WAVES per transaction
-* **Fast Finality**: \~1 minute confirmation
-* **Predictable Costs**: No gas price volatility
+### Data Storage
+```ride
+# Protocol configuration stored on-chain
+func tryGetString(key: String) = {
+  match getString(this, key) {
+    case a: String => a
+    case _ => ""
+  }
+}
+
+# Access stored values
+let usdtIdStr = tryGetString("setup_usdtId")
+let usdtuIdStr = valueOrElse(getString("setup_usdtuId"), "B45iYkZVC9cudR2yxrsJnrM75StiTrwphbfQ7xkyisip")
+let lpIdStr = tryGetString("setup_lpId")
+```
 
 ## Monitoring and Alerts
 
 ### Real-time Monitoring
+- **Price Deviations**: Oracle volatility tolerance enforced
+- **Strategy Performance**: AI agent monitoring
+- **Liquidity Levels**: Automated withdrawal processing
+- **System Health**: Smart contract state validation
 
-* **Price Deviations**: Alert on unusual LP price movements
-* **Strategy Performance**: Monitor individual strategy returns
-* **Liquidity Levels**: Track withdrawal capacity
-* **System Health**: Overall protocol performance
+### Error Handling
+```ride
+# Comprehensive error messages for user guidance
+if (pmt.assetId != usdtId && pmt.assetId != usdtuId) then
+  throw("please attach USDT: " + usdtIdStr + ", " + usdtuIdStr)
 
-### User Notifications
-
-* **Price Updates**: Hourly LP price changes
-* **Strategy Changes**: When AI switches strategies
-* **Risk Alerts**: Unusual market conditions
-* **Performance Reports**: Weekly summaries
+# Volatility protection
+if (oracleChangeDelta > OracleVolatilityTolerance) then
+  throw("max change for oracle is " + toString(fraction(OracleVolatilityTolerance / 100, Scale6)) + "%")
+```
 
 {% hint style="warning" %}
 **Important**: LP token prices can go down as well as up. AI strategies don't guarantee profits and may result in losses during adverse market conditions.
@@ -225,6 +279,6 @@ modifier emergencyStop() {
 
 ## Next Steps
 
-* Understand [LP Token mechanics](lp-tokens.md) in detail
-* Learn about [Protocol Features](../protocol/features.md) to see AI capabilities
-* Explore [Yield Sources](../protocol/yield-sources.md) for profit generation
+- Understand [LP Token mechanics](lp-tokens.md) in detail
+- Learn about [Protocol Features](../protocol/features.md) to see AI capabilities
+- Explore [Yield Sources](../protocol/yield-sources.md) for profit generation 

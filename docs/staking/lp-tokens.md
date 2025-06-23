@@ -18,14 +18,15 @@ LP (Liquidity Provider) tokens are **receipt tokens** that represent your propor
 ### Token Standard
 - **Blockchain**: Waves native token
 - **Standard**: Waves token protocol
-- **Decimals**: 8 (matching USDTu/USDT-ERC20 precision)
-- **Symbol**: PUPAS-LP
+- **Decimals**: 6 (matching protocol precision)
+- **Symbol**: PUPAS LP
 
 ## Price Appreciation Model
 
 ### Core Formula
-```
-LP Token Price = (Total Pool Value + Protocol Account Balance) ÷ Total LP Token Supply
+```ride
+# LP Token Price = Total Pool Balance ÷ Total LP Token Supply
+let currentPrice = tryGetInteger("global_lpPrice")
 ```
 
 ## Minting and Burning
@@ -34,31 +35,40 @@ LP Token Price = (Total Pool Value + Protocol Account Balance) ÷ Total LP Token
 
 When you stake USDTu/USDT-ERC20, new LP tokens are minted:
 
-```javascript
-// Calculate LP tokens to mint
-const lpTokensToMint = stakeAmount / currentLpPrice;
+```ride
+# Calculate LP tokens to mint
+let feeAmount = fraction(pmt.amount, MintFee, Scale6)  # 0.3% protocol fee
+let cleanAmount = pmt.amount - feeAmount
+let lpAmount = fraction(cleanAmount, Scale6, tryGetInteger("global_lpPrice"))
 
-// Example: Stake 1,000 USDTu at 1.05 LP price
-// LP tokens = 1,000 / 1.05 = 952.38 LP tokens
+# Mint LP tokens and transfer to user
+[
+  Reissue(lpId, lpAmount, true),
+  ScriptTransfer(i.caller, lpAmount, lpId)
+]
 ```
 
 #### Minting Example
 | Stake Amount | LP Price | LP Tokens Received |
 |--------------|----------|-------------------|
-| 100 USDTu | 1.00 | 100.00 LP |
-| 100 USDTu | 1.10 | 90.91 LP |
-| 100 USDTu | 1.25 | 80.00 LP |
+| 100 USDTu | 1.00 | 99.7 LP (after 0.3% fee) |
+| 100 USDTu | 1.10 | 90.64 LP (after 0.3% fee) |
+| 100 USDTu | 1.25 | 79.76 LP (after 0.3% fee) |
 
 ### Burning Process (Withdrawal)
 
 When you withdraw, LP tokens are burned for USDTu:
 
-```javascript
-// Calculate USDTu to return
-const usdtToReturn = lpTokensToBurn * currentLpPrice;
+```ride
+# Calculate USDTu to return
+let lpAmount = pmt.amount
+let amountToWithdraw = fraction(lpAmount, tryGetInteger("global_lpPrice"), Scale6)
 
-// Example: Burn 952.38 LP tokens at 1.15 LP price
-// USDT = 952.38 * 1.15 = 1,095.24 USDTu
+# Burn LP tokens and transfer USDT
+[
+  Burn(lpId, lpAmount),
+  ScriptTransfer(i.caller, amountToWithdraw, fromBase58String(assetIdStr))
+]
 ```
 
 #### Burning Example
@@ -74,17 +84,12 @@ const usdtToReturn = lpTokensToBurn * currentLpPrice;
 
 Your yield comes from LP token price increases:
 
-```javascript
-// Calculate your yield
-const initialLpPrice = 1.00;  // Price when you staked
-const currentLpPrice = 1.15;  // Current price
-const yield = (currentLpPrice / initialLpPrice - 1) * 100;
-// Yield = 15%
-
-// Annualized (if held for 6 months)
-const daysHeld = 180;
-const apy = Math.pow(currentLpPrice / initialLpPrice, 365 / daysHeld) - 1;
-// APY ≈ 32.25%
+```ride
+# Calculate yield (pseudocode for demonstration)
+let initialLpPrice = 1000000  # 1.00 with 6 decimals
+let currentLpPrice = 1150000  # 1.15 with 6 decimals
+let yieldPercent = fraction((currentLpPrice - initialLpPrice), 100, initialLpPrice)
+# Yield = 15%
 ```
 
 ### Compound Growth
@@ -103,19 +108,38 @@ No need to claim or reinvest - gains compound within the LP token price.
 
 ### Oracle System
 
-LP token prices update every hour via smart contract oracle. LP token price is calculated as (Total Pool Value + Current Account Balance) ÷ Total LP Token Supply.
+LP token prices update hourly via the `updateLpPrice` function:
+
+```ride
+@Callable(i)
+func updateLpPrice(lpPrice: Int) = {
+  let currentOraclePrice = valueOrElse(getInteger("global_lpPrice"), Scale6)
+  let oracleChangeDelta = abs(max(
+    fraction(currentOraclePrice, Scale6, lpPrice),
+    fraction(lpPrice, Scale6, currentOraclePrice)
+  ) - Scale6)
+  
+  # Validate caller and price change limits
+  if (i.caller != this) then
+    throw("available for self invoke only")
+  else if (oracleChangeDelta > OracleVolatilityTolerance) then
+    throw("max change for oracle is " + toString(fraction(OracleVolatilityTolerance / 100, Scale6)) + "%")
+  else
+    [IntegerEntry("global_lpPrice", lpPrice)]
+}
+```
 
 ### Update Process
 
 1. **Data Collection**: Oracle aggregates pool value and investment returns
 2. **Price Calculation**: New LP price computed using formula
-3. **Validation**: Price change limits prevent manipulation
+3. **Validation**: Price change limited to 10% per update
 4. **On-chain Update**: New price written to smart contract
-5. **Event Emission**: Price update event logged for transparency
+5. **Event Logging**: Price update recorded on blockchain
 
 ### Price History Tracking
 
-All price updates are recorded on-chain/blockchain.
+All price updates are recorded on-chain via `IntegerEntry("global_lpPrice", lpPrice)`.
 
 ## Investment Impact on Price
 
@@ -123,9 +147,9 @@ All price updates are recorded on-chain/blockchain.
 
 #### Profitable Investments
 ```
-Before: Pool = 1,000,000 USDTu, LP Supply = 1,000,000, Price = 1.00, Account Balance = 0 USDTu
+Before: Pool = 1,000,000 USDTu, LP Supply = 1,000,000, Price = 1.00
 AI Profit: +50,000 USDTu (5% return)
-After: Pool = 1,050,000 USDTu, LP Supply = 1,000,000, Price = 1.05, Account Balance = 50,000 USDTu
+After: Pool = 1,050,000 USDTu, LP Supply = 1,000,000, Price = 1.05
 ```
 
 #### Loss Scenarios
@@ -139,14 +163,18 @@ After: Pool = 970,000 USDTu, LP Supply = 1,000,000, Price = 0.97
 
 Protocol fee (0.3%) is deducted at staking time:
 
-```javascript
-// Staking with protocol fee
-const stakeAmount = 1000;       // USDTu to stake
-const protocolFee = stakeAmount * 0.003;  // 3 USDTu fee
-const netStake = stakeAmount - protocolFee;  // 997 USDTu
+```ride
+# Staking with protocol fee
+let feeAmount = fraction(pmt.amount, MintFee, Scale6)  # 0.3% of stake
+let cleanAmount = pmt.amount - feeAmount
+let lpAmount = fraction(cleanAmount, Scale6, tryGetInteger("global_lpPrice"))
 
-// LP tokens minted based on net stake
-const lpTokens = netStake / currentLpPrice;  // 997 LP tokens if price = 1.00
+# Fee sent to treasury, LP tokens based on net stake
+[
+  ScriptTransfer(FeeAddress, feeAmount, pmt.assetId),
+  Reissue(lpId, lpAmount, true),
+  ScriptTransfer(i.caller, lpAmount, lpId)
+]
 ```
 
 ## LP Token Utility
@@ -155,12 +183,12 @@ const lpTokens = netStake / currentLpPrice;  // 997 LP tokens if price = 1.00
 - **Yield Generation**: Hold for price appreciation
 - **Withdrawal**: Burn for USDTu at current price
 - **Transfer**: Send to other wallets (maintains yield exposure)
-- **Portfolio Tracking**: Monitor via block explorers
+- **Portfolio Tracking**: Monitor via Waves Explorer
 
 ### Future Utility (Roadmap)
-- **Governance Voting**: Vote on protocol proposals (Q4 2025)
-- **Strategy Selection**: Choose preferred AI investment strategies (Q4 2025)
-- **Liquidity Mining**: Additional rewards for providing LP token liquidity
+- **Governance Voting**: Vote on protocol proposals
+- **Strategy Selection**: Choose preferred AI investment strategies
+- **Fee Discounts**: Reduced protocol fees for large holders
 
 ## Risk Factors
 
@@ -169,7 +197,7 @@ const lpTokens = netStake / currentLpPrice;  // 997 LP tokens if price = 1.00
 #### Smart Contract Risk
 - **Code Bugs**: Potential vulnerabilities in staking contract
 - **Oracle Manipulation**: Risk of price oracle attacks
-- **Admin Keys**: Centralized control during early phases
+- **Access Control**: Centralized oracle updates during early phases
 
 #### Market Risk
 - **AI Strategy Losses**: Investment strategies may lose money
@@ -177,10 +205,10 @@ const lpTokens = netStake / currentLpPrice;  // 997 LP tokens if price = 1.00
 - **Price Volatility**: LP token prices can fluctuate significantly
 
 #### Mitigation Measures
-- **Audited Contracts**: Professional security reviews completed
-- **Position Limits**: Maximum exposure caps per strategy
-- **Diversification**: Risk spread across multiple investments
-- **Emergency Procedures**: Circuit breakers and pause mechanisms
+- **Volatility Limits**: 10% maximum price change per update
+- **Access Control**: Only authorized addresses can update prices
+- **Error Handling**: Comprehensive validation and error messages
+- **Transparency**: All operations recorded on blockchain
 
 {% hint style="warning" %}
 **Risk Disclosure**: LP token prices can decrease as well as increase. AI investment strategies don't guarantee profits and may result in losses during adverse market conditions.
@@ -191,19 +219,17 @@ const lpTokens = netStake / currentLpPrice;  // 997 LP tokens if price = 1.00
 ### Key Metrics to Track
 
 #### Price Performance
-- **Current LP Price**: Real-time token value
-- **Price History**: 24h, 7d, 30d price charts
+- **Current LP Price**: Real-time token value from `global_lpPrice`
+- **Price History**: Historical oracle updates
 - **APY Calculation**: Annualized yield based on price appreciation
 - **Benchmark Comparison**: Performance vs USDT savings rates
 
 #### Portfolio Value
-```javascript
-// Your portfolio calculation
-const yourLpTokens = 952.38;
-const currentLpPrice = 1.15;
-const portfolioValue = yourLpTokens * currentLpPrice;  // 1,095.24 USDTu
-const initialStake = 1000;  // Original stake
-const totalGain = portfolioValue - initialStake;  // 95.24 USDTu profit
+```ride
+# Your portfolio calculation (pseudocode)
+let yourLpTokens = 997000000  # 997 LP tokens (6 decimals)
+let currentLpPrice = tryGetInteger("global_lpPrice")
+let portfolioValue = fraction(yourLpTokens, currentLpPrice, Scale6)
 ```
 
 ### Dashboard Features
@@ -225,13 +251,26 @@ Unlike traditional LP tokens in AMMs, Pupas LP tokens don't suffer from imperman
 | Must provide two tokens | Single token (USDTu) staking |
 | Price tied to underlying assets | Price reflects pool performance |
 
-### Arbitrage Opportunities
+### Smart Contract Integration
 
-LP token price updates create potential arbitrage:
+LP token operations are handled by RIDE smart contract functions:
 
-1. **Oracle Lag**: Brief delays between actual and on-chain prices
-2. **Cross-platform**: Price differences between platforms (future)
-3. **Withdrawal Timing**: Strategic timing around price updates
+```ride
+# Helper functions for safe operations
+func tryGetInteger(key: String) = {
+  match getInteger(this, key) {
+    case a: Int => a
+    case _ => 0
+  }
+}
+
+func tryGetString(key: String) = {
+  match getString(this, key) {
+    case a: String => a
+    case _ => ""
+  }
+}
+```
 
 {% hint style="info" %}
 **Advanced Users**: LP token mechanics enable sophisticated strategies. See our [Staking Mechanics](mechanics.md) for technical implementation details.
