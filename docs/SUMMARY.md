@@ -5,6 +5,7 @@
 ## Protocol Overview
 * [What is Pupas Protocol](protocol/overview.md)
 * [Key Features](protocol/features.md)
+* [Technical Information](protocol/technical-info.md)
 * [Development Roadmap](protocol/roadmap.md)
 * [Yield Sources](protocol/yield-sources.md)
 
