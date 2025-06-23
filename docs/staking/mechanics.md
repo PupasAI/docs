@@ -9,6 +9,7 @@ Understanding the technical mechanics behind Pupas Protocol helps you maximize r
 ### Smart Contract Functions
 
 #### Stake Function
+
 ```solidity
 function stake(uint256 amount, uint8 tokenType) external returns (uint256 lpTokens) {
     // Validate token type
@@ -30,6 +31,7 @@ function stake(uint256 amount, uint8 tokenType) external returns (uint256 lpToke
 ```
 
 #### Withdraw Function
+
 ```solidity
 function withdraw(uint256 lpTokens) external returns (uint256 usdtAmount) {
     // Calculate USDT amount to return
@@ -50,10 +52,11 @@ function withdraw(uint256 lpTokens) external returns (uint256 usdtAmount) {
 ## LP Token Price Mechanism
 
 ### Price Update Frequency
-- **Interval**: Every 60 minutes (3,600 seconds)
-- **Data Sources**: Multiple exchange APIs aggregated
-- **Validation**: Price change limits prevent manipulation
-- **Transparency**: All updates recorded on-chain
+
+* **Interval**: Every 60 minutes (3,600 seconds)
+* **Data Sources**: Multiple exchange APIs aggregated
+* **Validation**: Price change limits prevent manipulation
+* **Transparency**: All updates recorded on-chain
 
 ## Investment Flow
 
@@ -69,18 +72,21 @@ function withdraw(uint256 lpTokens) external returns (uint256 usdtAmount) {
 ### Investment Strategies
 
 #### Lending Protocol Selection
-- **Protocol Analysis**: AI evaluates available lending platforms on Waves
-- **Risk Assessment**: Evaluate smart contract security and yields
-- **Optimal Allocation**: Distribute funds across best protocols
+
+* **Protocol Analysis**: AI evaluates available lending platforms on Waves
+* **Risk Assessment**: Evaluate smart contract security and yields
+* **Optimal Allocation**: Distribute funds across best protocols
 
 #### Staking Opportunities
-- **Validator Selection**: Choose best performing validators
-- **Delegation Strategies**: Optimize staking rewards
-- **Auto-Compounding**: Reinvest staking rewards automatically
+
+* **Validator Selection**: Choose best performing validators
+* **Delegation Strategies**: Optimize staking rewards
+* **Auto-Compounding**: Reinvest staking rewards automatically
 
 ## Risk Management System
 
 ### Position Limits
+
 ```javascript
 const RISK_LIMITS = {
     maxPositionSize: 0.25,      // 25% of pool per strategy
@@ -91,26 +97,32 @@ const RISK_LIMITS = {
 ```
 
 ### Stop-Loss Mechanisms
-- **Individual Positions**: 5% stop-loss per trade
-- **Strategy Level**: 10% drawdown triggers strategy pause
-- **Pool Level**: 15% total loss triggers emergency mode
+
+* **Individual Positions**: 5% stop-loss per trade
+* **Strategy Level**: 10% drawdown triggers strategy pause
+* **Pool Level**: 15% total loss triggers emergency mode
 
 ### Diversification Rules
-- **Maximum 4 active strategies** at any time
-- **No more than 40% in single asset class**
-- **Geographic diversification** across exchanges
+
+* **Maximum 4 active strategies** at any time
+* **No more than 40% in single asset class**
+* **Geographic diversification** across exchanges
 
 ## Token Economics
 
 ### LP Token Supply Management
 
 #### Minting Process
+
 ```
-New LP Tokens = Stake Amount ÷ Current LP Price
+Protocol Fee = Stake Amount * 0.003
+Net Stake = Stake Amount - protocolFee
+New LP Tokens = Net Stake ÷ Current LP Price
 Total LP Supply += New LP Tokens
 ```
 
 #### Burning Process
+
 ```
 USDT Return = LP Tokens × Current LP Price
 Total LP Supply -= Burned LP Tokens
@@ -119,6 +131,7 @@ Total LP Supply -= Burned LP Tokens
 ### Fee Structure
 
 #### Protocol Fee (0.3% of stake)
+
 ```javascript
 // Applied at staking time, sent to treasury
 function stake(uint256 amount) external {
@@ -134,28 +147,10 @@ function stake(uint256 amount) external {
 }
 ```
 
-## Withdrawal Mechanics
-
-### Instant Withdrawal
-- **Liquidity Pool**: 15% of funds kept for instant withdrawals
-- **No Lock Period**: Withdraw anytime without penalties
-- **Current Price**: Always withdraw at latest LP price
-
-### Large Withdrawal Handling
-```javascript
-if (withdrawalAmount > liquidityPool * 0.5) {
-    // Large withdrawal may require up to 24 hours
-    // AI agents liquidate positions as needed
-    scheduleDelayedWithdrawal(user, amount);
-} else {
-    // Instant withdrawal from liquidity pool
-    processInstantWithdrawal(user, amount);
-}
-```
-
 ## Performance Tracking
 
 ### APY Calculation
+
 ```javascript
 // Rolling 30-day APY calculation
 const periodReturns = [];
@@ -169,14 +164,16 @@ const annualizedAPY = Math.pow(1 + avgDailyReturn, 365) - 1;
 ```
 
 ### Performance Metrics
-- **Sharpe Ratio**: Risk-adjusted returns
-- **Maximum Drawdown**: Largest peak-to-trough decline
-- **Win Rate**: Percentage of profitable strategies
-- **Volatility**: Standard deviation of returns
+
+* **Sharpe Ratio**: Risk-adjusted returns
+* **Maximum Drawdown**: Largest peak-to-trough decline
+* **Win Rate**: Percentage of profitable strategies
+* **Volatility**: Standard deviation of returns
 
 ## Emergency Procedures
 
 ### Circuit Breakers
+
 ```solidity
 modifier emergencyStop() {
     require(!paused, "Contract is paused");
@@ -189,9 +186,10 @@ modifier emergencyStop() {
 ```
 
 ### Recovery Mechanisms
-- **Pause Trading**: Stop new investments during market stress
-- **Liquidate Positions**: Convert investments back to USDT
-- **Proportional Distribution**: Share remaining funds among LP holders
+
+* **Pause Trading**: Stop new investments during market stress
+* **Liquidate Positions**: Convert investments back to USDT
+* **Proportional Distribution**: Share remaining funds among LP holders
 
 {% hint style="info" %}
 **Technical Deep Dive**: For additional technical details, see our [Protocol Features](../protocol/features.md) and [LP Tokens](lp-tokens.md) guides.
@@ -199,29 +197,27 @@ modifier emergencyStop() {
 
 ## Gas Optimization
 
-### Batch Operations
-- **Multiple Stakes**: Combine small stakes to reduce gas costs
-- **Withdrawal Queuing**: Process multiple withdrawals together
-- **Oracle Updates**: Batch price updates when possible
-
 ### Waves Blockchain Benefits
-- **Low Fees**: ~0.005 WAVES per transaction
-- **Fast Finality**: ~1 minute confirmation
-- **Predictable Costs**: No gas price volatility
+
+* **Low Fees**: \~0.005 WAVES per transaction
+* **Fast Finality**: \~1 minute confirmation
+* **Predictable Costs**: No gas price volatility
 
 ## Monitoring and Alerts
 
 ### Real-time Monitoring
-- **Price Deviations**: Alert on unusual LP price movements
-- **Strategy Performance**: Monitor individual strategy returns
-- **Liquidity Levels**: Track withdrawal capacity
-- **System Health**: Overall protocol performance
+
+* **Price Deviations**: Alert on unusual LP price movements
+* **Strategy Performance**: Monitor individual strategy returns
+* **Liquidity Levels**: Track withdrawal capacity
+* **System Health**: Overall protocol performance
 
 ### User Notifications
-- **Price Updates**: Hourly LP price changes
-- **Strategy Changes**: When AI switches strategies
-- **Risk Alerts**: Unusual market conditions
-- **Performance Reports**: Weekly summaries
+
+* **Price Updates**: Hourly LP price changes
+* **Strategy Changes**: When AI switches strategies
+* **Risk Alerts**: Unusual market conditions
+* **Performance Reports**: Weekly summaries
 
 {% hint style="warning" %}
 **Important**: LP token prices can go down as well as up. AI strategies don't guarantee profits and may result in losses during adverse market conditions.
@@ -229,6 +225,6 @@ modifier emergencyStop() {
 
 ## Next Steps
 
-- Understand [LP Token mechanics](lp-tokens.md) in detail
-- Learn about [Protocol Features](../protocol/features.md) to see AI capabilities
-- Explore [Yield Sources](../protocol/yield-sources.md) for profit generation 
+* Understand [LP Token mechanics](lp-tokens.md) in detail
+* Learn about [Protocol Features](../protocol/features.md) to see AI capabilities
+* Explore [Yield Sources](../protocol/yield-sources.md) for profit generation

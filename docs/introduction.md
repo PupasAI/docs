@@ -1,23 +1,23 @@
-# Pupas Protocol: AI-Powered USDT Staking
+# Introduction
 
 **Automate your crypto yield with intelligent AI agents on Waves blockchain**
 
-Pupas Protocol combines artificial intelligence with DeFi mechanics to provide automated yield generation through intelligent investment strategies. Stake USDTu tokens, receive LP tokens, and earn yield through AI-driven price appreciation.
+Pupas Protocol combines artificial intelligence with DeFi mechanics to provide automated yield generation through intelligent investment strategies. Stake USDT tokens, receive LP tokens, and earn yield through AI-driven price appreciation.
 
 ## Quick Start
 
 1. **Connect Wallet** → Visit [pupas.ai](https://pupas.ai)
-2. **Stake USDTu** → Any amount (ERC-20 or USDTu)
+2. **Stake USDTu** → Any amount (USDT-ERC-20 or USDTu)
 3. **Receive LP Tokens** → Get LP tokens representing your stake
 4. **Earn Yield** → AI agents optimize your returns automatically
 
 ## Key Features
 
-- **AI Investment Agents**: Automated lending/staking strategies on Waves DeFi protocols
-- **Hourly Oracle Updates**: LP token prices updated every hour via smart contract
-- **Multi-Token Support**: Stake USDT-ERC20 or native USDTu tokens
-- **4-Agent Chat System**: Get support from specialized AI assistants
-- **Waves Blockchain**: Fast, low-cost transactions on Waves ecosystem
+* **AI Investment Agents**: Automated lending/staking strategies on Waves DeFi protocols
+* **Hourly Oracle Updates**: LP token prices updated every hour via smart contract
+* **Multi-Token Support**: Stake USDT-ERC20 or native USDTu tokens
+* **4-Agent Chat System**: Get support from specialized AI assistants
+* **Waves Blockchain**: Fast, low-cost transactions on Waves ecosystem
 
 ## How It Works
 
@@ -45,11 +45,11 @@ Withdrawal Amount = LP Tokens × Current LP Price
 
 ## Platform Pages
 
-- **[Main Page](https://pupas.ai)**: Protocol overview and statistics
-- **[Staking](https://pupas.ai/staking)**: Stake/withdraw interface with APY tracking
-- **[AI Chat](https://pupas.ai/chat)**: 4 specialized AI assistants for support
+* [**Main Page**](https://pupas.ai): Protocol overview and statistics
+* [**Staking**](https://pupas.ai/staking): Stake/withdraw interface with APY tracking
+* [**AI Chat**](https://pupas.ai/chat): 4 specialized AI assistants for support
 
 ## What's Next?
 
-- Explore [Staking Mechanics](staking/mechanics.md) to understand the system
-- Check the [Development Roadmap](protocol/roadmap.md) for upcoming features 
+* Explore [Staking Mechanics](staking/mechanics.md) to understand the system
+* Check the [Development Roadmap](protocol/roadmap.md) for upcoming features
