@@ -1,0 +1,13 @@
+root: ./
+structure:
+  readme: introduction.md
+  summary: SUMMARY.md
+redirects:
+  README.md: introduction.md
+  overview/README.md: protocol/overview.md
+  staking/README.md: staking/introduction.md
+  tokenomics/README.md: tokenomics/overview.md
+  ai-assistant/README.md: ai-system/chat-overview.md
+  marketing/: support/
+  technical/README.md: developers/technical-guide.md
+  security/README.md: security/risks-and-measures.md 

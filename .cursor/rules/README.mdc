@@ -1,0 +1,106 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Cursor Rules for Pupas Protocol Documentation
+
+## Overview
+This directory contains cursor rules for generating comprehensive GitBook documentation for Pupas Protocol - an AI-powered staking platform for USDTu tokens on Waves blockchain.
+
+## Project Description
+Pupas Protocol combines artificial intelligence with DeFi mechanics to provide automated yield generation through intelligent investment strategies. Users stake USDTu tokens, receive LP tokens, and earn yield through LP token price appreciation driven by AI agents.
+
+## Documentation Structure
+**Total: 16 content pages + 2 setup files across 7 sections**
+
+### Core Pages
+1. **introduction.md** - Project overview and quick start
+2. **SUMMARY.md** - GitBook table of contents  
+3. **.gitbook.yaml** - GitBook configuration
+
+### Protocol Overview (3 pages)
+- **protocol/overview.md** - What is Pupas Protocol
+- **protocol/features.md** - Core features and benefits
+- **protocol/roadmap.md** - Development roadmap and future plans
+
+### Staking Guide (3 pages)
+- **staking/introduction.md** - Staking overview and getting started
+- **staking/mechanics.md** - Detailed staking mechanism
+- **staking/lp-tokens.md** - LP token mechanics and calculations
+
+### Tokenomics (3 pages)
+- **tokenomics/overview.md** - Economic model overview
+- **tokenomics/ai-strategies.md** - AI investment strategies
+- **tokenomics/yield-sources.md** - Where yields come from
+
+### AI System (2 pages)
+- **ai-system/chat-overview.md** - AI chat assistant overview
+- **ai-system/agent-types.md** - 4 specialized agent types
+
+### Support & Community (3 pages)
+- **support/faq.md** - Frequently asked questions
+- **support/ai-in-crypto.md** - Educational content about AI in crypto
+- **support/community.md** - Contact information and community links
+
+### Developer Resources (1 page)
+- **developers/technical-guide.md** - Technical implementation guide
+
+### Security (1 page)
+- **security/risks-and-measures.md** - Security overview and risk assessment
+
+## Key Features to Document
+- AI-powered investment strategies with 4 specialized agents
+- LP token mechanics with hourly price updates via oracle
+- USDTu staking on Waves blockchain (minimum 100 USDTu)
+- Multi-agent chat system (General, Analytics, Technical, Security)
+- Three main platform pages: landing, staking, chat assistant
+- Development roadmap with multi-chain expansion, mobile apps, and governance
+
+## Rules Files
+
+### 1. folder-structure.mdc
+Defines the exact folder structure, naming conventions, and GitBook integration requirements. Includes specifications for the new roadmap page and asset organization.
+
+### 2. main-documentation-style.mdc  
+Establishes writing style, tone, target audience, and content structure templates. Includes roadmap-specific formatting guidelines and SEO optimization strategies.
+
+### 3. gitbook-formatting.mdc
+GitBook-specific syntax, hint blocks, code formatting, and 2024 standards. Features roadmap visualization with Mermaid diagrams and progress indicators.
+
+### 4. technical-specifications.mdc
+Technical architecture, smart contract functions, AI agent specifications, and API documentation. Includes current implementation and roadmap technical enhancements.
+
+### 5. content-templates.mdc
+Page templates for all sections including the new roadmap template. Provides consistent structure for protocol overview, staking guides, AI system documentation, and support content.
+
+### 6. seo-keywords.mdc
+SEO keyword strategy, primary/secondary keywords, and page-specific keyword mapping. Includes roadmap-related keywords and trending AI-crypto terms for 2024.
+
+## Usage Instructions
+1. Use these rules to generate consistent, professional GitBook documentation
+2. Follow the folder structure exactly as specified
+3. Apply the writing style and formatting guidelines consistently
+4. Include roadmap references throughout relevant sections
+5. Maintain SEO optimization with proper keyword usage
+6. Ensure all content follows the technical specifications
+
+## Key Technical Details
+- **Blockchain**: Waves ecosystem only (no Ethereum)
+- **Token**: USDTu (Waves native USDT)
+- **Oracle**: Hourly LP price updates via `updateLpPrice` method
+- **Calculation**: `LP_price = total_usdt_balance / total_lp_tokens_num`
+- **Withdrawal**: Burns LP tokens, returns USDTu based on current LP price
+- **AI Agents**: 4 types for chat + investment management system
+- **Roadmap**: Multi-chain support, mobile apps, governance (2024-2025)
+
+## Content Guidelines
+- Target AI-curious crypto enthusiasts and DeFi power users
+- Maintain technical accuracy while ensuring accessibility
+- Include educational content about AI in cryptocurrency
+- Provide comprehensive FAQ and community support information
+- Reference roadmap milestones and future developments
+- Use GitBook 2024 standards with enhanced formatting features
+
+## File Format
+All rules files use `.mdc` format for consistency and proper markdown handling.

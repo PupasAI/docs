@@ -1,0 +1,170 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Main Documentation Style Guide
+
+## Project Overview
+This documentation covers Pupas Protocol - an AI-powered staking platform for USDTu tokens on Waves blockchain. The protocol uses artificial intelligence to optimize investment strategies, providing automated yield generation through sophisticated AI agents that analyze market conditions and execute trades.
+
+## Target Audience
+
+### Primary: AI-Curious Crypto Enthusiasts
+- Technical crypto users interested in AI-powered DeFi
+- Ages 25-45, experienced with staking and yield farming
+- Seeking automated, intelligent investment strategies
+- Want to understand how AI enhances crypto returns
+
+### Secondary: DeFi Power Users
+- Advanced DeFi participants looking for new opportunities
+- Familiar with LP tokens, oracles, and protocol mechanics
+- Interested in cutting-edge financial technology
+- Value transparency and technical documentation
+
+### Tertiary: Crypto Education Seekers
+- Users wanting to learn about AI in cryptocurrency
+- New to AI-powered protocols but crypto-experienced
+- Seeking comprehensive guides and explanations
+- Need marketing content and community support
+
+## Language Style Guidelines
+
+### Tone & Voice
+- **Technical but accessible**: Use precise technical terminology while maintaining clarity
+- **Authoritative**: Present information with confidence and expertise
+- **Concise**: Every sentence should add value - no fluff
+- **Action-oriented**: Use active voice and clear instructions
+- **Future-focused**: Include roadmap references and development plans
+
+### SEO Optimization
+- Include primary keywords: "AI crypto", "USDTu staking", "AI-powered DeFi", "artificial intelligence blockchain"
+- Use semantic keywords: "automated trading", "AI investment strategies", "machine learning DeFi", "intelligent yield farming"
+- Structure content with clear H1, H2, H3 hierarchy
+- Include meta descriptions for each page (max 160 characters)
+- Target trending keywords: "AI revolution crypto 2024", "decentralized AI networks"
+
+### Writing Principles
+1. **Lead with value**: Start each section with the key benefit or outcome
+2. **Use specific numbers**: APY rates, token amounts, time intervals, roadmap dates
+3. **Include code examples**: Smart contract interactions, API calls
+4. **Provide clear steps**: Numbered lists for processes
+5. **Address risks upfront**: Transparency about potential issues
+6. **Reference future plans**: Connect current features to roadmap items
+
+### Technical Terminology
+- LP Token: Liquidity Provider Token (always capitalize)
+- Oracle: Price oracle system (explain on first use)
+- APY: Annual Percentage Yield (spell out first time)
+- Smart Contract: Capitalize when referring to specific contracts
+- Waves Blockchain: Always capitalize properly
+- AI Agent: Artificial Intelligence Agent (capitalize when referring to specific agents)
+
+## Content Structure Requirements
+
+### Page Structure Template
+```
+# Page Title (H1)
+Brief description (1-2 sentences)
+
+## Overview (H2)
+Key points in bullet format
+
+## Technical Details (H2)
+Detailed implementation information
+
+## Examples (H2)
+Code snippets and use cases
+
+## Future Development (H2)
+Roadmap references and planned improvements
+
+## Security Considerations (H2)
+Risk factors and mitigations
+
+## FAQ (H2)
+Common questions and answers
+```
+
+### Roadmap Page Structure Template
+```
+# Development Roadmap (H1)
+Vision statement and current status
+
+## Current Status (H2)
+What's live and operational now
+
+## Short-term Goals (Q1-Q2) (H2)
+Immediate development priorities
+
+## Medium-term Plans (Q3-Q4) (H2)
+Major feature releases and improvements
+
+## Long-term Vision (2025+) (H2)
+Future innovations and expansions
+
+## Community Involvement (H2)
+How users can participate in development
+
+## Timeline Visualization (H2)
+Mermaid diagrams and progress indicators
+```
+
+### Code Block Standards
+- Use syntax highlighting for all code blocks
+- Include comments explaining complex logic
+- Provide complete, runnable examples
+- Use consistent indentation (2 spaces)
+
+### Mathematical Formulas
+Use LaTeX notation for complex formulas:
+```
+LP Token Price = Total USDT Balance / Total LP Tokens
+```
+
+## SEO Content Blocks
+
+### Required Meta Information
+Each page must include:
+- Title tag (50-60 characters)
+- Meta description (150-160 characters)
+- Primary keyword in first paragraph
+- Internal linking strategy
+- Roadmap references where relevant
+
+### Content Blocks to Include
+1. **Problem Statement**: What issue does this solve?
+2. **Solution Overview**: How does the protocol address it?
+3. **Technical Implementation**: Detailed how-it-works
+4. **User Benefits**: Clear value propositions
+5. **Future Enhancements**: Roadmap connections
+6. **Risk Disclosure**: Transparent about potential issues
+7. **Getting Started**: Step-by-step onboarding
+
+## Roadmap Content Guidelines
+
+### Timeline Presentation
+- Use clear date ranges (Q1 2024, Q2 2024, etc.)
+- Include progress indicators (0%, 25%, 50%, 75%, 100%)
+- Show dependencies between features
+- Highlight community-requested features
+
+### Feature Descriptions
+- **Current Status**: What's working now
+- **Development Stage**: Planning, In Progress, Testing, Complete
+- **Expected Timeline**: Realistic delivery estimates
+- **User Impact**: How it benefits the community
+- **Technical Requirements**: What needs to be built
+
+### Visual Elements for Roadmap
+- Mermaid timeline diagrams
+- Progress bars and completion indicators
+- Feature comparison tables
+- Community voting results
+- Development milestone markers
+
+### Integration Strategy
+- Link roadmap items to relevant documentation sections
+- Reference upcoming features in current feature pages
+- Connect community feedback to development priorities
+- Update roadmap regularly based on progress and feedback

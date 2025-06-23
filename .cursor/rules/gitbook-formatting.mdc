@@ -1,0 +1,343 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# GitBook Formatting Guidelines
+
+## GitBook-Specific Syntax (2024 Standards)
+
+### Hint Blocks
+# GitBook Formatting Guidelines
+
+## GitBook-Specific Syntax (2024 Standards)
+
+### Hint Blocks
+Use GitBook's enhanced hint blocks for important information:
+
+```markdown
+{% hint style="info" %}
+**Technical Note**: LP token prices update every hour via our decentralized oracle system.
+{% endhint %}
+
+{% hint style="warning" %}
+**Security Warning**: Always verify contract addresses and never share private keys.
+{% endhint %}
+
+{% hint style="danger" %}
+**Risk Disclaimer**: DeFi protocols involve smart contract risks and potential total loss of funds. Only invest what you can afford to lose.
+{% endhint %}
+
+{% hint style="success" %}
+**Pro Tip**: Monitor your LP token price appreciation to track yield accumulation over time.
+{% endhint %}
+```
+
+### Enhanced Content Blocks (2024)
+
+#### Educational Callouts
+```markdown
+{% hint style="info" %}
+**What is AI in Crypto?** 
+AI-powered protocols use machine learning to optimize investment strategies, providing automated yield farming and risk management.
+{% endhint %}
+```
+
+#### Marketing-Focused Hints
+```markdown
+{% hint style="success" %}
+**Join the AI Revolution**
+Experience the future of DeFi with intelligent, automated staking strategies.
+
+[Start Staking Now →](mdc:https:/pupas.ai/staking)
+{% endhint %}
+```
+
+#### Roadmap Progress Indicators
+```markdown
+{% hint style="info" %}
+**Development Status**: 🟢 Complete | 🟡 In Progress | 🔴 Planned
+
+**Q2 2024**: Multi-chain support 🟡 75% complete
+{% endhint %}
+```
+
+### Code Blocks with Syntax Highlighting
+
+#### JavaScript/TypeScript Examples
+```javascript
+// Staking USDT tokens
+const stakingContract = new Contract(STAKING_ADDRESS, ABI);
+const result = await stakingContract.stake(amount, tokenType);
+```
+
+#### Solidity Smart Contract Examples
+```solidity
+// updateLpPrice function in the oracle contract
+function updateLpPrice(uint256 newPrice) external onlyOracle {
+    lpTokenPrice = newPrice;
+    lastUpdateTime = block.timestamp;
+    emit LpPriceUpdated(newPrice, block.timestamp);
+}
+```
+
+#### API Response Examples
+```json
+{
+  "success": true,
+  "data": {
+    "currentAPY": "12.5",
+    "lpTokenPrice": "1.0234",
+    "totalStaked": "1000000.00"
+  }
+}
+```
+
+### Tabs for Multiple Options
+Use tabs for different token types or implementation examples:
+
+{% tabs %}
+{% tab title="Current Features" %}
+```javascript
+const currentFeatures = {
+  staking: "✅ Live",
+  aiAgents: "✅ Live",
+  lpTokens: "✅ Live"
+};
+```
+{% endtab %}
+
+{% tab title="Upcoming Features" %}
+```javascript
+const upcomingFeatures = {
+  multiChain: "🟡 Q2 2024",
+  mobileApp: "🔴 Q3 2024",
+  governance: "🔴 Q4 2024"
+};
+```
+{% endtab %}
+{% endtabs %}
+
+### Expandable Sections
+For detailed technical information:
+
+<details>
+<summary>Advanced Oracle Implementation Details</summary>
+
+The price oracle updates LP token prices every hour using the following calculation:
+
+```
+LP Token Price = (Total USDT Balance + Pool Liquidity) / Total LP Tokens Outstanding
+```
+
+This ensures accurate pricing based on real-time liquidity conditions.
+</details>
+
+### FAQ Formatting (2024 Best Practices)
+Use collapsible sections for FAQ content:
+
+```markdown
+<details>
+<summary>What is the minimum staking amount?</summary>
+
+The minimum staking amount is **100 USDTu** to ensure efficient gas usage and meaningful yield generation. This threshold helps maintain optimal protocol performance while keeping entry barriers accessible.
+</details>
+
+<details>
+<summary>How often are LP token prices updated?</summary>
+
+LP token prices update **every hour** via our decentralized oracle system. The price calculation follows this formula:
+
+**LP Price = Total USDTu in Pool ÷ Total LP Tokens**
+
+You can track price changes in real-time on our analytics dashboard.
+</details>
+```
+
+### Modern GitBook Features (2024)
+
+#### Page Variants for Different Audiences
+```markdown
+---
+description: "Technical implementation details for developers"
+audience: ["developers", "technical"]
+---
+
+# Technical Documentation
+
+[Technical content here]
+```
+
+#### Interactive Elements
+```markdown
+{% hint style="info" %}
+**Interactive Demo Available**
+Try our live staking simulator to understand LP token mechanics.
+
+[Launch Simulator →](mdc:https:/pupas.ai/simulator)
+{% endhint %}
+```
+
+## Roadmap-Specific Formatting
+
+### Timeline Visualization with Mermaid
+```mermaid
+gantt
+    title Pupas Protocol Development Roadmap
+    dateFormat  YYYY-MM-DD
+    section Phase 1
+    Core Platform Launch    :done, phase1, 2024-01-01, 2024-03-31
+    AI Agents Integration   :done, agents, 2024-02-01, 2024-03-15
+    section Phase 2
+    Multi-chain Support     :active, multi, 2024-04-01, 2024-06-30
+    Mobile Application      :mobile, 2024-07-01, 2024-09-30
+    section Phase 3
+    Governance Token        :gov, 2024-10-01, 2024-12-31
+    Advanced AI Features    :ai2, 2025-01-01, 2025-03-31
+```
+
+### Progress Indicators
+```markdown
+## Feature Development Progress
+
+### Multi-chain Support
+🟢🟢🟢🟡⚪ **75% Complete**
+- ✅ Ethereum integration
+- ✅ Polygon support
+- ✅ BSC compatibility
+- 🔄 Arbitrum implementation
+- ⏳ Optimism integration
+
+### Mobile Application
+🟡⚪⚪⚪⚪ **20% Complete**
+- ✅ UI/UX design
+- 🔄 iOS development
+- ⏳ Android development
+- ⏳ Beta testing
+- ⏳ App store submission
+```
+
+### Roadmap Tables
+| Feature | Status | Timeline | Priority |
+|---------|--------|----------|----------|
+| Multi-chain Support | 🟡 In Progress | Q2 2024 | High |
+| Mobile App | 🔴 Planned | Q3 2024 | Medium |
+| Governance | 🔴 Planned | Q4 2024 | High |
+| Advanced AI | 🔴 Planned | Q1 2025 | Medium |
+
+## Mathematical Formulas
+
+### Inline Math
+Use LaTeX notation for inline formulas: The LP token price is calculated as `$P_{LP} = \frac{B_{total}}{T_{LP}}$`
+
+### Block Math
+For complex formulas, use block notation:
+
+```math
+APY = \left(\frac{P_{final}}{P_{initial}}\right)^{\frac{365}{days}} - 1
+```
+
+Where:
+- `P_final` = Final LP token price
+- `P_initial` = Initial LP token price  
+- `days` = Number of days staked
+
+## Tables and Data Presentation
+
+### Comparison Tables
+| Token Type | Network | Decimals | Contract Address |
+|------------|---------|----------|------------------|
+| USDTu | Waves | 6 | `34N9YcEETLWn93qYQ64EsP1x89tSruJU44RrEMSXXEPJ` |
+
+### APY Statistics Table
+| Period | Min APY | Max APY | Average APY |
+|--------|---------|---------|-------------|
+| 30 days | 8.2% | 15.7% | 12.1% |
+| 90 days | 7.8% | 16.2% | 11.8% |
+| 1 year | 6.5% | 18.3% | 12.3% |
+
+## Interactive Elements
+
+### Page Rating
+Add page rating at the bottom:
+```markdown
+---
+description: How helpful was this page?
+---
+
+{% hint style="info" %}
+Rate this page: ⭐⭐⭐⭐⭐
+{% endhint %}
+```
+
+### Call-to-Action Buttons
+```markdown
+{% hint style="success" %}
+**Ready to start staking?**
+
+[Start Staking →](mdc:https:/pupas.ai/staking)
+{% endhint %}
+```
+
+### Roadmap Feedback
+```markdown
+{% hint style="info" %}
+**Have feedback on our roadmap?**
+
+Join the discussion on our [Discord community](mdc:https:/discord.gg/pupas) or vote on feature priorities.
+
+[Share Feedback →](mdc:https:/pupas.ai/feedback)
+{% endhint %}
+```
+
+## Code Documentation Standards
+
+### Function Documentation
+```javascript
+/**
+ * Calculates LP token price based on current pool state
+ * @param {string} totalBalance - Total USDT balance in wei
+ * @param {string} totalSupply - Total LP token supply
+ * @returns {string} LP token price in USDT
+ * @example
+ * const price = calculateLpPrice("1000000000000", "900000000000");
+ * // Returns "1.1111"
+ */
+function calculateLpPrice(totalBalance, totalSupply) {
+  return (BigInt(totalBalance) / BigInt(totalSupply)).toString();
+}
+```
+
+## Visual Elements
+
+### Diagrams and Flowcharts
+Use Mermaid diagrams for process flows:
+
+```mermaid
+graph TD
+    A[User Stakes USDT] --> B[Receive LP Tokens]
+    B --> C[Earn Yield Over Time]
+    C --> D[LP Price Updates Hourly]
+    D --> E[User Withdraws]
+```
+
+### Roadmap Flow Diagram
+```mermaid
+graph LR
+    A[Phase 1: Core Platform] --> B[Phase 2: Expansion]
+    B --> C[Phase 3: Advanced Features]
+    C --> D[Phase 4: Ecosystem]
+    
+    A1[Staking Platform] --> A
+    A2[AI Agents] --> A
+    A3[LP Tokens] --> A
+    
+    B1[Multi-chain] --> B
+    B2[Mobile App] --> B
+    
+    C1[Governance] --> C
+    C2[Advanced AI] --> C
+    
+    D1[Partnerships] --> D
+    D2[Integrations] --> D
+``` 

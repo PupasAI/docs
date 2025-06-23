@@ -1,0 +1,195 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Technical Specifications
+
+## Protocol Architecture
+
+### Core Components
+# Technical Specifications
+
+## Protocol Architecture Overview
+
+### Core System Components
+Pupas Protocol is built on Waves blockchain with the following technical architecture:
+
+#### Smart Contract Layer
+- **Staking Contract**: Handles USDTu deposits and LP token minting
+- **Oracle Contract**: Updates LP token prices hourly via `updateLpPrice` method
+- **Investment Contract**: Manages AI agent investment strategies
+- **Governance Contract**: (Roadmap Q4 2024) Community voting and protocol updates
+
+#### AI Agent System
+- **Investment Agent**: Analyzes markets and executes trading strategies
+- **Risk Management Agent**: Monitors portfolio exposure and implements safeguards
+- **Oracle Agent**: Aggregates price data from multiple sources
+- **Governance Agent**: (Roadmap Q1 2025) Automated proposal analysis
+
+## Smart Contract Functions
+
+### Staking Contract Methods
+
+#### Core Staking Functions
+```solidity
+// Stake USDTu tokens and receive LP tokens
+function stake(uint256 amount) external returns (uint256 lpTokens);
+
+// Withdraw USDTu by burning LP tokens
+function withdraw(uint256 lpTokens) external returns (uint256 usdtAmount);
+
+// View current LP token price
+function getLpTokenPrice() external view returns (uint256);
+
+// Get user's staking balance
+function getStakeBalance(address user) external view returns (uint256);
+```
+
+
+#### Price Calculation Formula
+```
+LP Token Price = (Total USDTu Balance + Investment Returns) / Total LP Token Supply
+```
+
+## LP Token Mechanics
+
+### Token Lifecycle
+1. **Minting**: When users stake USDTu tokens
+   - Calculate LP tokens: `stakeAmount / currentLpPrice`
+   - Mint LP tokens to user's address
+   - Update total supply and user balance
+
+2. **Price Appreciation**: Through AI investment returns
+   - Investment gains increase total pool value
+   - LP token price increases proportionally
+   - No new tokens minted (yield through price appreciation)
+
+3. **Burning**: When users withdraw
+   - Calculate withdrawal: `lpTokens * currentLpPrice`
+   - Burn LP tokens from user's balance
+   - Transfer USDTu to user
+
+### Mathematical Models
+```
+Initial LP Tokens = Stake Amount ÷ LP Price at Stake Time
+Withdrawal Amount = LP Tokens × Current LP Price
+User Yield = (Current LP Price ÷ Initial LP Price - 1) × 100%
+```
+
+## AI Investment Agent Architecture
+
+### Current Implementation
+- **Market Analysis Engine**: Real-time data processing from multiple CEXs
+- **Strategy Execution Module**: Automated trade execution based on AI decisions
+- **Risk Management System**: Position sizing and stop-loss mechanisms
+- **Performance Tracking**: Continuous monitoring of investment returns
+
+
+### Roadmap Enhancements (2024-2025)
+- **Advanced ML Models**: Deep learning for market prediction
+- **Cross-chain Strategies**: Multi-blockchain investment opportunities
+- **DeFi Protocol Integration**: Automated protocol switching
+- **More Tokens Pairs support**: Added new token pairs
+
+## AI Chat Assistant System
+
+
+### Agent Types and Capabilities
+
+#### 1. General Support Agent
+- **Purpose**: Basic platform navigation and general questions
+- **Capabilities**: FAQ responses, feature explanations, onboarding guidance
+- **Knowledge Base**: Platform features, basic DeFi concepts, user guides
+
+#### 2. Yield Analytics Agent
+- **Purpose**: Investment performance analysis and insights
+- **Capabilities**: APY calculations, performance tracking, strategy explanations
+- **Knowledge Base**: Historical data, market analysis, investment strategies
+
+#### 3. Technical Support Agent
+- **Purpose**: Technical issues and smart contract interactions
+- **Capabilities**: Transaction troubleshooting, wallet integration, error diagnosis
+- **Knowledge Base**: Smart contract functions, common errors, technical documentation
+
+#### 4. Security & Risk Agent
+- **Purpose**: Risk assessment and security guidance
+- **Capabilities**: Risk analysis, security recommendations, threat monitoring
+- **Knowledge Base**: Security best practices, risk factors, threat intelligence
+
+### Roadmap AI Enhancements
+- **Multi-language Support** (Q2 2025): Localized agents for global users
+- **Predictive Analytics** (Q4 2025): Proactive user insights
+- **Advanced NLP** (Q1 2026): More sophisticated conversation handling
+
+## Frontend Architecture
+
+### Current Platform Pages
+
+#### 1. Main Landing Page (https://pupas.ai)
+- **Components**: Hero section, feature overview, statistics dashboard
+- **Functionality**: Protocol introduction, key metrics display
+- **Tech Stack**: React.js, Web3.js integration
+
+#### 2. Staking Interface (https://pupas.ai/staking)
+- **Components**: Wallet connection, staking form, balance display
+- **Functionality**: Stake/unstake operations, real-time APY display
+- **Features**: Transaction history, LP token price tracking
+
+#### 3. AI Chat Assistant (https://pupas.ai/chat)
+- **Components**: Chat interface, agent selector, conversation history
+- **Functionality**: Real-time AI conversations, context-aware responses
+- **Features**: Multi-agent support, rich media responses
+
+### Roadmap Frontend Development
+
+#### Mobile Application (Q3 2024)
+- **Platform**: React Native for iOS and Android
+- **Features**: Full staking functionality, push notifications, biometric security
+- **Integration**: Native wallet support, offline mode capabilities
+
+#### Advanced Analytics Dashboard (Q4 2024)
+- **Features**: Portfolio analytics, performance charts, strategy insights
+- **Visualization**: Interactive charts, real-time data streaming
+- **Customization**: Personalized dashboards, alert configurations
+
+## Blockchain Integration
+
+### Waves Blockchain Specifications
+- **Network**: Waves Mainnet
+- **Token Standard**: Waves native tokens for USDTu
+- **Transaction Fees**: ~0.005 WAVES per transaction
+- **Block Time**: ~1 minute average confirmation
+- **Finality**: Immediate after block inclusion
+
+### Smart Contract Deployment
+```javascript
+// Contract addresses (Mainnet)
+const CONTRACTS = {
+  STAKING: "3P...", // Main staking contract
+  ORACLE: "3P...", // Price oracle contract
+  USDTU: "34N9YcEETLWn93qYQ64EsP1x89tSruJU44RrEMSXXEPJ", // USDTu token
+  LP_TOKEN: "3P..." // LP token contract
+};
+```
+
+### Multi-chain Roadmap (Q2-Q3 2025)
+- **Ethereum**: Full EVM compatibility with Ethereum mainnet
+- **Polygon**: Low-cost transactions for smaller stakes
+- **BSC**: Binance Smart Chain integration
+- **Arbitrum**: Layer 2 scaling solution
+- **Optimism**: Additional Layer 2 option
+
+## Performance and Scalability
+
+### Current Metrics
+- **Transaction Throughput**: 1000+ transactions per hour
+- **API Response Time**: <200ms average
+- **Uptime**: 99.9% availability target
+- **Data Processing**: Real-time price updates every hour
+
+### Scalability Roadmap
+- **Database Optimization** (Q2 2024): Improved query performance
+- **CDN Implementation** (Q2 2024): Global content delivery
+- **Microservices Migration** (Q3 2024): Improved system resilience
+- **Auto-scaling Infrastructure** (Q4 2024): Dynamic resource allocation

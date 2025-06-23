@@ -1,0 +1,179 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Documentation Folder Structure
+
+## Repository Organization
+Follow this exact folder structure for optimal GitBook integration and navigation:
+
+```
+Documentation/
+├── introduction.md              # Project overview and quick start
+├── SUMMARY.md                  # GitBook table of contents
+├── .gitbook.yaml              # GitBook configuration
+├── protocol/
+│   ├── overview.md            # What is Pupas Protocol
+│   ├── features.md            # Core features and benefits
+│   └── roadmap.md             # Development roadmap and future plans
+├── staking/
+│   ├── introduction.md        # Staking overview
+│   ├── mechanics.md           # Staking mechanism details
+│   └── lp-tokens.md           # LP token mechanics
+├── tokenomics/
+│   ├── overview.md            # Tokenomics overview
+│   ├── ai-strategies.md       # How the AI agent invests staked funds
+│   └── yield-sources.md       # Where yields come from
+├── ai-system/
+│   ├── chat-overview.md       # AI chat overview
+│   └── agent-types.md         # 4 types of chat agents
+├── support/
+│   ├── faq.md                 # Frequently Asked Questions
+│   ├── ai-in-crypto.md        # Educational: AI in crypto explained
+│   └── community.md           # Contact information and community links
+├── developers/
+│   └── technical-guide.md     # Technical overview (draft for you to fill)
+└── security/
+    └── risks-and-measures.md   # Security and risks overview
+```
+
+## File Naming Conventions
+
+### General Rules
+- Use lowercase with hyphens: `lp-tokens.md`
+- Be descriptive but concise: `ai-strategies.md`
+- Use meaningful names that indicate content: `roadmap.md`
+- Avoid special characters and spaces
+
+### Page Naming Strategy
+- **Overview pages**: Use descriptive names that match navigation
+- **Technical pages**: Include implementation details in filename
+- **User guides**: Start with action verbs when applicable
+- **Planning pages**: Use clear names like `roadmap.md`
+
+## GitBook Integration Requirements
+
+### SUMMARY.md Structure
+Must follow this exact format for proper GitBook navigation:
+
+```markdown
+# Table of Contents
+
+* [Introduction](introduction.md)
+
+## Protocol Overview
+* [What is Pupas Protocol](protocol/overview.md)
+* [Key Features](protocol/features.md)
+* [Development Roadmap](protocol/roadmap.md)
+
+## Staking Guide
+* [Getting Started](staking/introduction.md)
+* [Staking Mechanics](staking/mechanics.md)
+* [LP Tokens](staking/lp-tokens.md)
+
+## Tokenomics
+* [Economic Model](tokenomics/overview.md)
+* [AI Investment Strategies](tokenomics/ai-strategies.md)
+* [Yield Sources](tokenomics/yield-sources.md)
+
+## AI System
+* [Chat Assistant](ai-system/chat-overview.md)
+* [Agent Types](ai-system/agent-types.md)
+
+## Support & Community
+* [Frequently Asked Questions](support/faq.md)
+* [AI in Cryptocurrency](support/ai-in-crypto.md)
+* [Community & Contact](support/community.md)
+
+## Developer Resources
+* [Technical Guide](developers/technical-guide.md)
+
+## Security
+* [Risks & Security Measures](security/risks-and-measures.md)
+```
+
+### .gitbook.yaml Configuration
+Create this file in root directory:
+
+```yaml
+root: ./
+structure:
+  readme: introduction.md
+  summary: SUMMARY.md
+redirects:
+  README.md: introduction.md
+  overview/README.md: protocol/overview.md
+  staking/README.md: staking/introduction.md
+  tokenomics/README.md: tokenomics/overview.md
+  ai-assistant/README.md: ai-system/chat-overview.md
+  marketing/: support/
+  technical/README.md: developers/technical-guide.md
+  security/README.md: security/risks-and-measures.md
+```
+
+## Content Organization Principles
+
+### Section Hierarchy
+1. **Protocol Overview** (3 pages): High-level introduction, features, and roadmap
+2. **Staking Guide** (3 pages): Core protocol functionality and mechanics
+3. **Tokenomics** (3 pages): Investment strategy and yield sources
+4. **AI System** (2 pages): Chat system and agent details
+5. **Support & Community** (3 pages): FAQ, educational content, community
+6. **Developer Resources** (1 page): Technical implementation guide
+7. **Security** (1 page): Risk assessment and security measures
+
+**Total: 16 content pages + 2 setup files (introduction.md, SUMMARY.md)**
+
+### Page Length Guidelines
+- **Overview pages**: 300-500 words
+- **Roadmap page**: 600-800 words with timeline visualization
+- **Technical pages**: 500-800 words (or draft outline)
+- **Guide pages**: 400-600 words
+- **Reference pages**: As needed for completeness
+
+### Cross-Reference Strategy
+- Link between related sections using relative paths
+- Include "See also" sections at page bottoms
+- Create a glossary of terms with consistent linking
+- Use GitBook's hint blocks for important notes
+- Reference roadmap milestones from relevant feature pages
+
+## Asset Organization
+
+### Images and Diagrams
+```
+assets/
+├── images/
+│   ├── staking-flow/
+│   ├── tokenomics/
+│   └── roadmap/
+└── diagrams/
+    ├── system-architecture.svg
+    ├── staking-process.svg
+    ├── investment-flow.svg
+    └── development-timeline.svg
+```
+
+### GitBook Asset References
+Use relative paths: `![Architecture](../assets/diagrams/system-architecture.svg)`
+
+## Roadmap Page Specifications
+
+### Content Structure for Roadmap
+- **Current Status**: What's live now
+- **Short-term Goals** (Q1-Q2): Immediate development priorities
+- **Medium-term Plans** (Q3-Q4): Major feature releases
+- **Long-term Vision** (2025+): Future innovations and expansions
+- **Community Involvement**: How users can participate in development
+
+### Roadmap Visual Elements
+- Timeline diagrams using Mermaid
+- Progress indicators for current milestones
+- Feature comparison tables
+- Community voting results on priorities
+
+### Integration with Other Pages
+- Link roadmap items to relevant technical sections
+- Reference upcoming features in current feature descriptions
+- Connect community feedback to roadmap priorities
