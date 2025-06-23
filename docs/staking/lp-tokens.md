@@ -158,9 +158,8 @@ const lpTokens = netStake / currentLpPrice;  // 997 LP tokens if price = 1.00
 - **Portfolio Tracking**: Monitor via block explorers
 
 ### Future Utility (Roadmap)
-- **Governance Voting**: Vote on protocol proposals (Q4 2024)
-- **Fee Discounts**: Reduced protocol fees for large holders
-- **Strategy Selection**: Choose preferred AI investment strategies
+- **Governance Voting**: Vote on protocol proposals (Q4 2025)
+- **Strategy Selection**: Choose preferred AI investment strategies (Q4 2025)
 - **Liquidity Mining**: Additional rewards for providing LP token liquidity
 
 ## Risk Factors
@@ -235,11 +234,11 @@ LP token price updates create potential arbitrage:
 3. **Withdrawal Timing**: Strategic timing around price updates
 
 {% hint style="info" %}
-**Advanced Users**: LP token mechanics enable sophisticated strategies. See our [Technical Guide](../developers/technical-guide.md) for implementation details.
+**Advanced Users**: LP token mechanics enable sophisticated strategies. See our [Staking Mechanics](mechanics.md) for technical implementation details.
 {% endhint %}
 
 ## Next Steps
 
-- Learn about [AI Investment Strategies](../tokenomics/ai-strategies.md) that drive LP price appreciation
-- Explore [Yield Sources](../tokenomics/yield-sources.md) to understand profit generation
+- Learn about [Yield Sources](../protocol/yield-sources.md) to understand profit generation
+- Explore [Protocol Features](../protocol/features.md) to see how AI drives returns
 - Check the [FAQ](../support/faq.md) for common LP token questions 

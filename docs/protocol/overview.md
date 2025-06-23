@@ -8,7 +8,7 @@ Pupas Protocol revolutionizes DeFi by combining artificial intelligence with aut
 
 Traditional staking provides fixed rewards. Pupas Protocol delivers **dynamic yield through AI optimization**:
 
-- Stake USDTu tokens → Receive LP tokens
+- Stake USDT tokens → Receive LP tokens
 - AI agents invest pooled funds in best lending/staking protocols
 - LP token price increases with investment profits
 - Withdraw at any time with accumulated gains

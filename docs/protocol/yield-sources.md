@@ -167,6 +167,6 @@ Pupas yields come from fundamental DeFi activities:
 
 ## Learn More
 
-- [AI Investment Strategies](ai-strategies.md) - How AI optimizes protocol selection
-- [Economic Model](overview.md) - Complete tokenomics breakdown
+- [Protocol Features](features.md) - How AI optimizes protocol selection
+- [Protocol Overview](overview.md) - Complete protocol breakdown
 - [Staking Mechanics](../staking/mechanics.md) - Technical implementation details 

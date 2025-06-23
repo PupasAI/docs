@@ -145,4 +145,4 @@ Need assistance? Our AI chat system provides 24/7 support:
 
 - Learn about [Staking Mechanics](mechanics.md) for detailed system understanding
 - Explore [LP Token mechanics](lp-tokens.md) to understand yield generation
-- Check [AI Investment Strategies](../tokenomics/ai-strategies.md) to see how returns are generated 
+- Check [Protocol Features](../protocol/features.md) to see how AI generates returns 

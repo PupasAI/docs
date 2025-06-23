@@ -194,7 +194,7 @@ modifier emergencyStop() {
 - **Proportional Distribution**: Share remaining funds among LP holders
 
 {% hint style="info" %}
-**Technical Deep Dive**: For smart contract implementation details, see our [Technical Guide](../developers/technical-guide.md).
+**Technical Deep Dive**: For additional technical details, see our [Protocol Features](../protocol/features.md) and [LP Tokens](lp-tokens.md) guides.
 {% endhint %}
 
 ## Gas Optimization
@@ -230,5 +230,5 @@ modifier emergencyStop() {
 ## Next Steps
 
 - Understand [LP Token mechanics](lp-tokens.md) in detail
-- Learn about [AI Investment Strategies](../tokenomics/ai-strategies.md)
-- Explore [Yield Sources](../tokenomics/yield-sources.md) for profit generation 
+- Learn about [Protocol Features](../protocol/features.md) to see AI capabilities
+- Explore [Yield Sources](../protocol/yield-sources.md) for profit generation 
