@@ -27,12 +27,14 @@ This page contains all essential technical information for interacting with Pupa
 - **Type**: Native Waves token
 
 ### USDT-ERC20 (Bridged)
-- **Symbol**: USDT-ERC20
+- **Asset ID**: `9wc3LXNA4TEBsXyKtoLE9mrbDD7WMHXvXrCjZvabLAsi`
+- **Symbol**: USDT-ERC20-PPT
 - **Network**: Ethereum → Waves (via gateway)
 - **Type**: Bridged token
 - **Status**: Supported for staking
 
 ### LP Token
+- **Asset ID**: `8noP1ct6QykJ245Gr7xFbRDGY5uELp46T3gFc1GWgS3f`
 - **Name**: PUPAS LP
 - **Description**: PUPAS AI TREASURY LP
 - **Decimals**: 6
