@@ -6,16 +6,18 @@ Join our growing community of AI-crypto enthusiasts and DeFi users. Get support,
 
 ## Community Channels
 
-### Telegram
+
 **Official announcements and quick discussions**
 
-🔗 **[@pupasprotocol](https://t.me/pupasprotocol)** - Official announcements
-🔗 **[@pupaschat](https://t.me/+h9lgAg3y8LUyMTky)** - Community chat
+📢 **[Official Telegram Announcements](https://t.me/pupasprotocol)**
 
-### Twitter/X
-**Latest news and updates**
+💬 **[Join Telegram Community Chat](https://t.me/+h9lgAg3y8LUyMTky)**
 
-🔗 **[@Pupas_AI](https://x.com/Pupas_AI)**
+
+🐦 **[Official Twitter/X](https://x.com/Pupas_AI)**
+
+
+📝 **[Medium](https://medium.com/@pupas.help)**
 
 ## Direct Support
 

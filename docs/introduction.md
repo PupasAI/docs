@@ -7,7 +7,7 @@ Pupas Protocol combines artificial intelligence with DeFi mechanics to provide a
 ## Quick Start
 
 1. **Connect Wallet** → Visit [pupas.ai](https://pupas.ai)
-2. **Stake USDTu** → Any amount (ERC-20 or USDTu)
+2. **Stake USDT** → Any amount (USDT-ERC20 or USDTu)
 3. **Receive LP Tokens** → Get LP tokens representing your stake
 4. **Earn Yield** → AI agents optimize your returns automatically
 
