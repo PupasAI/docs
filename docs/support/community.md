@@ -10,12 +10,12 @@ Join our growing community of AI-crypto enthusiasts and DeFi users. Get support,
 **Official announcements and quick discussions**
 
 🔗 **[@pupasprotocol](https://t.me/pupasprotocol)** - Official announcements
-🔗 **[@pupaschat](https://t.me/pupaschat)** - Community chat
+🔗 **[@pupaschat](https://t.me/+h9lgAg3y8LUyMTky)** - Community chat
 
 ### Twitter/X
 **Latest news and updates**
 
-🔗 **[@PupasAI](https://twitter.com/PupasAI)**
+🔗 **[@Pupas_AI](https://x.com/Pupas_AI)**
 
 ## Direct Support
 
