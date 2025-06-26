@@ -72,28 +72,6 @@
 - User experience improvements
 - Analytics dashboard creation
 
-## Timeline Overview
-
-```mermaid
-gantt
-    title Development Timeline
-    dateFormat YYYY-MM-DD
-    axisFormat %b %Y
-    
-    section Foundation
-    Core Platform       :done, foundation, 2024-01-01, 2024-03-31
-    AI Integration      :done, ai-core, 2024-02-01, 2024-03-15
-    
-    section Enhancement
-    UI Improvements     :active, ui, 2024-04-01, 2024-06-30
-    AI Enhancement      :active, ai-enhanced, 2024-05-01, 2024-07-31
-    
-    section Expansion
-    Feature Addition    :expansion, 2024-08-01, 2024-10-31
-    
-    section Governance
-    Community Tools     :governance, 2024-11-01, 2024-12-31
-```
 
 ## Community Participation
 
