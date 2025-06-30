@@ -24,7 +24,7 @@ Join our growing community of AI-crypto enthusiasts and DeFi users. Get support,
 ### AI Chat System
 **24/7 automated support with specialized AI agents**
 
-🔗 **[pupas.ai/chat](https://pupas.ai/chat)**
+🔗 **[pupas.ai/assistant](https://pupas.ai/assistant)**
 
 Available agents:
 - **General Support**: Platform navigation and basic questions
