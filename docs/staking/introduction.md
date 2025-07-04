@@ -131,9 +131,9 @@ All fees are clearly displayed before transaction confirmation. The protocol fee
 
 Need assistance? Our AI chat system provides 24/7 support:
 
-- **[General Support](https://pupas.ai/chat)**: Basic questions and navigation
-- **[Technical Help](https://pupas.ai/chat)**: Transaction issues and troubleshooting
-- **[Yield Analytics](https://pupas.ai/chat)**: Performance insights and strategies
+- **[General Support](https://pupas.ai/assistant)**: Basic questions and navigation
+- **[Technical Help](https://pupas.ai/assistant)**: Transaction issues and troubleshooting
+- **[Yield Analytics](https://pupas.ai/assistant)**: Performance insights and strategies
 
 {% hint style="success" %}
 **Ready to Start Earning?**

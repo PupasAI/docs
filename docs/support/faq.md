@@ -249,7 +249,7 @@ The AI chat features four specialized agents:
 - **Technical Support**: Transaction help and troubleshooting
 - **Security & Risk**: Risk assessment and security guidance
 
-Available at pupas.ai/chat for user assistance.
+Available at pupas.ai/assistant for user assistance.
 </details>
 
 <details>
@@ -344,7 +344,7 @@ Use the platform dashboard for most accurate, real-time information.
 <summary>How can I get additional support?</summary>
 
 **Support Options**:
-- **AI Chat**: pupas.ai/chat - Automated support system
+- **AI Chat**: pupas.ai/assistant - Automated support system
 - **Community Channels**: Discord and Telegram for discussions
 - **Documentation**: Comprehensive guides and tutorials
 - **Direct Contact**: Email support for complex issues
@@ -372,7 +372,7 @@ Security reports are taken seriously and investigated promptly.
 
 Use our AI chat system for immediate assistance with platform questions.
 
-[Ask AI Agents →](https://pupas.ai/chat)
+[Ask AI Agents →](https://pupas.ai/assistant)
 {% endhint %}
 
 ---

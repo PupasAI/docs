@@ -15,7 +15,7 @@
 ### Platform Components
 
 - Staking interface at pupas.ai/staking
-- AI chat system at pupas.ai/chat
+- AI chat system at pupas.ai/assistant
 - Oracle price updates via `updateLpPrice` method
 - Multi-token support (USDTu and USDT-ERC20)
 

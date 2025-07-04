@@ -215,11 +215,11 @@ Provides security guidance, risk assessment, and threat detection to keep users 
 {% hint style="success" %}
 **Expert AI Support**: Get specialized assistance from our AI agents.
 
-[Start Chatting →](https://pupas.ai/chat)
+[Start Chatting →](https://pupas.ai/assistant)
 {% endhint %}
 
 ## Next Steps
 
-- Try the [AI Chat System](https://pupas.ai/chat) to experience agent capabilities
+- Try the [AI Chat System](https://pupas.ai/assistant) to experience agent capabilities
 - Review [FAQ](../support/faq.md) for additional common questions
 - Join our [Community](../support/community.md) for peer support and discussions 

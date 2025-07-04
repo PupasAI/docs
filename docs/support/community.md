@@ -57,7 +57,7 @@ Available agents:
 
 | Purpose | Channel | Response Time |
 |---------|---------|---------------|
-| **Immediate Help** | [AI Chat](https://pupas.ai/chat) | Instant |
+| **Immediate Help** | [AI Chat](https://pupas.ai/assistant) | Instant |
 | **General Support** | pupas.help@proton.me | 24-48 hours |
 
 {% hint style="success" %}

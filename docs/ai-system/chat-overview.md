@@ -15,7 +15,7 @@ Our AI chat system employs multiple specialized agents, each trained for specifi
 - **Security & Risk Agent**: Risk assessment and security guidance
 
 ### Access Points
-- **Web Interface**: [pupas.ai/chat](https://pupas.ai/chat)
+- **Web Interface**: [pupas.ai/assistant](https://pupas.ai/assistant)
 - **Integrated Help**: Available throughout the platform
 - **Mobile Ready**: Responsive design for all devices
 - **24/7 Availability**: Always online, no wait times
@@ -112,7 +112,7 @@ Our AI chat system employs multiple specialized agents, each trained for specifi
 ## Getting Started with AI Chat
 
 ### First-Time Users
-1. **Visit Chat Interface**: Go to [pupas.ai/chat](https://pupas.ai/chat)
+1. **Visit Chat Interface**: Go to [pupas.ai/assistant](https://pupas.ai/assistant)
 2. **Select Agent**: Choose the most relevant agent or let the system route automatically
 3. **Ask Questions**: Use natural language to describe your needs
 4. **Follow Guidance**: Implement suggested actions and ask follow-up questions
@@ -126,7 +126,7 @@ Our AI chat system employs multiple specialized agents, each trained for specifi
 {% hint style="success" %}
 **Get Instant Help**: Our AI agents are ready to assist you 24/7.
 
-[Start Chatting →](https://pupas.ai/chat)
+[Start Chatting →](https://pupas.ai/assistant)
 {% endhint %}
 
 ## Best Practices
