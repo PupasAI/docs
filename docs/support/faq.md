@@ -281,23 +281,11 @@ See the [Development Roadmap](../protocol/roadmap.md) for current development ph
 <details>
 <summary>Will there be a governance token?</summary>
 
-**Yes**, a governance token is planned for **Q4 2024**. Token holders will be able to:
+**Yes**, a governance token is planned for **Q4 2025**. Token holders will be able to:
 - Vote on protocol parameters and fee structures
 - Select AI investment strategies
 - Propose new features and improvements
 - Participate in revenue sharing (under consideration)
-</details>
-
-<details>
-<summary>When will multi-chain support be available?</summary>
-
-Multi-chain expansion is **75% complete** with launch expected in **Q2 2024**:
-- ✅ Ethereum integration ready
-- ✅ Polygon support implemented
-- 🔄 BSC compatibility in testing
-- ⏳ Arbitrum and Optimism development
-
-This will provide access to larger DeFi ecosystems and cross-chain arbitrage opportunities.
 </details>
 
 ## Troubleshooting

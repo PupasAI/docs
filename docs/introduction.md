@@ -47,7 +47,7 @@ Withdrawal Amount = LP Tokens × Current LP Price
 
 - **[Main Page](https://pupas.ai)**: Protocol overview and statistics
 - **[Staking](https://pupas.ai/staking)**: Stake/withdraw interface with APY tracking
-- **[AI Chat](https://pupas.ai/chat)**: 4 specialized AI assistants for support
+- **[AI Chat](https://pupas.ai/assistant)**: 4 specialized AI assistants for support
 
 ## What's Next?
 
